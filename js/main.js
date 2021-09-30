@@ -1,4 +1,4 @@
-const url = 'http://localhost/companionPi/ajax.php';
+const url = window.location.href + '/ajax.php';
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('addIpAddressBtn').onclick = onAddIpAdresseBtnClick;
     document.getElementById('keyboard').onclick = onKeyboardClick;
 
+    // IP-Adressen auslesen
+    _loadIpAddresses();
 });
 
 document.addEventListener('click', function (e) {
@@ -15,16 +17,42 @@ document.addEventListener('click', function (e) {
         selectedInputField = e.target;
         selectedInputField.dispatchEvent(new Event('input'));
     }
-})
+});
+
+
+function _loadIpAddresses() {
+    _makeRequest({}, 'getIpAddresses').then((response) => {
+
+        if (response.rows) {
+            let element = document.getElementById('ipAddresses');
+
+            response.rows.forEach((ipAddress) => {
+                let row = document.createElement('p');
+                row.innerHTML = ipAddress;
+                element.append(row);
+            });
+        }
+    });
+}
+
+function _manageMessages(response) {
+    if (response.errMsg) {
+        tata.error('Fehler', response.errMsg, {
+            duration: 10000
+        });
+    } else if (response.msg) {
+        tata.success('Info', response.msg, {
+            duration: 10000
+        });
+    }
+}
 
 
 function onAddIpAddressChange(e) {
     let element = e.target;
-    let value = e.target.value.replace(/\D/g,'');
+    let value = e.target.value.replace(/\D/g, '');
     let numbers = value.split('');
     let newValue = '';
-    let i = 0;
-    let d = 0;
 
     numbers.forEach(function (char, index) {
 
@@ -78,8 +106,8 @@ function onWifiChange(e) {
     if (value === 'on') {
         value = 'off';
     } else {
-        value = 'on';
         boolValue = true;
+        value = 'on';
     }
     e.target.value = value;
 
@@ -104,12 +132,20 @@ function _makeRequest(data, type, params = '') {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('load', () => {
-            resolve(JSON.parse(xhr.response));
+            const responseJson = JSON.parse(xhr.response);
+
+            // Nachrichten verarbeiten
+            _manageMessages(responseJson);
+
+            resolve(responseJson);
         });
 
         xhr.addEventListener('error', () => {
-            const json = JSON.parse(xhr.response);
+            const responseJson = JSON.parse(xhr.response);
+
+            // Nachrichten verarbeiten
             _manageMessages(json);
+
             reject(xhr.response);
         });
 

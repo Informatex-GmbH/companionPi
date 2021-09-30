@@ -64,6 +64,7 @@ body {
   flex: 1;
   display: flex;
 }
+.keyboard .row button,
 .keyboard .row .button {
   flex: 1;
   margin: 5px;
@@ -74,26 +75,27 @@ body {
   border-radius: 5px;
   border-bottom: 1px solid #b5b5b5;
 }
+.keyboard .row button {
+  color: white;
+  font-size: 18pt;
+}
 .main {
   margin: 20px;
   height: 100%;
+  display: flex;
+  flex-direction: row;
 }
-.main > .top {
+.main > .left {
+  width: 150px;
   display: flex;
 }
 .main > .center {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  flex: 1;
 }
-.main > .simple-keyboard {
-  background-color: #444444;
+.main > .right {
+  flex: 1;
 }
-.main > .simple-keyboard.dark .hg-button {
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+.main > .right p {
+  margin: 0px;
 }
 /*# sourceMappingURL=style.css.map */
