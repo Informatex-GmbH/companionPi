@@ -13,6 +13,7 @@ body {
 .main > .left {
   width: 150px;
   display: flex;
+  flex-direction: column;
 }
 .main > .left *,
 .main > .left *:after,
@@ -60,7 +61,7 @@ body {
   left: 3px;
 }
 .main > .center {
-  width: 250px;
+  flex: 1;
 }
 .main > .center > .addIpAddress > .field p {
   margin: 0px;

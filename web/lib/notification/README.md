@@ -44,4 +44,4 @@ tata.error('Hello', 'Have a nice day.', {// config})
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](LICENSE)

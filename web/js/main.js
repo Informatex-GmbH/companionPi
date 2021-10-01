@@ -34,7 +34,9 @@ function _loadIpAddresses() {
             response.rows.forEach((ipAddress) => {
                 let row = document.createElement('p');
                 row.innerHTML = ipAddress;
-                row.onclick = _onIpAdressClick(ipAddress);
+                row.onclick = function() {
+                    onRemoveIpAddressClick(ipAddress);
+                };
 
                 element.append(row);
             });
@@ -78,16 +80,32 @@ function onAddIpAddressChange(e) {
 }
 
 function onAddIpAdresseBtnClick() {
-    let ip = document.getElementById('addIpAddress').value;
+    let element = document.getElementById('addIpAddress');
+    let ip = element.value;
 
     let data = {
         value: ip
     };
 
-    _makeRequest(data, 'addIpAddress');
+    _makeRequest(data, 'addIpAddress').then((response) => {
+
+        if (!response.errMsg) {
+            element.value = '';
+        }
+
+        _loadIpAddresses();
+    });
 }
 
-function
+function onRemoveIpAddressClick(ip) {
+    let data = {
+        value: ip
+    };
+
+    _makeRequest(data, 'removeIpAddress').then(() => {
+        _loadIpAddresses();
+    });
+}
 
 function onKeyboardClick(e) {
 
