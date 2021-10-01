@@ -22,13 +22,20 @@ document.addEventListener('click', function (e) {
 
 function _loadIpAddresses() {
     _makeRequest({}, 'getIpAddresses').then((response) => {
+        let element = document.getElementById('ipAddresses');
 
+        // Alle IP-Adressen löschen
+        while (element.firstChild) {
+            element.removeChild(element.lastChild);
+        }
+
+        // IP-Adressen hinzufügen
         if (response.rows) {
-            let element = document.getElementById('ipAddresses');
-
             response.rows.forEach((ipAddress) => {
                 let row = document.createElement('p');
                 row.innerHTML = ipAddress;
+                row.onclick = _onIpAdressClick(ipAddress);
+
                 element.append(row);
             });
         }
@@ -79,6 +86,8 @@ function onAddIpAdresseBtnClick() {
 
     _makeRequest(data, 'addIpAddress');
 }
+
+function
 
 function onKeyboardClick(e) {
 

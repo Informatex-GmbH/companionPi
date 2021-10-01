@@ -9,6 +9,10 @@ try {
     // Type switchen
     switch ($type) {
         case 'addIpAddress':
+
+            $msg = 'Wurde noch nicht geprögt :)';
+
+            $response->msg = $msg;
             break;
 
         case 'getIpAddresses':
