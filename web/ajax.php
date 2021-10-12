@@ -57,6 +57,11 @@ try {
 
         case 'getIpAddresses':
             $ipAddresses = exec('hostname --all-ip-addresses', $output, $resultCode);
+
+            if ($resultCode) {
+                throw new Exception('IP Adressen konnten nicht ausgelesen werden.');
+            }
+
             $ipAddresses = explode(' ', $ipAddresses);
 
             $rows = [];
@@ -68,10 +73,24 @@ try {
             }
 
             $response->rows = $rows;
+            break;
+
+        case 'getWifiData':
+
+            $ssid = exec('sudo grep "ssid=" /etc/hostapd/hostapd.conf | cut -f2 -d"="', $output, $resultCode);
 
             if ($resultCode) {
-                throw new Exception('IP Adressen konnten nicht ausgelesen werden.');
+                throw new Exception('SSID konnte nicht ausgelesen werden.');
             }
+
+            $password = exec('sudo grep "wpa_passphrase=" /etc/hostapd/hostapd.conf | cut -f2 -d"="', $output, $resultCode);
+
+            if ($resultCode) {
+                throw new Exception('Password konnte nicht ausgelesen werden.');
+            }
+
+            $response->ssid = $ssid;
+            $response->password = $password;
             break;
 
         case 'removeIpAddress':

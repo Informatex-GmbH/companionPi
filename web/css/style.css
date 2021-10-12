@@ -11,7 +11,7 @@ body {
   flex-direction: row;
 }
 .main > .left {
-  width: 150px;
+  width: 170px;
   display: flex;
   flex-direction: column;
 }
@@ -60,18 +60,42 @@ body {
   top: 3px;
   left: 3px;
 }
+.main > .left > .wifiData {
+  font-size: 16px;
+}
+.main > .left > .wifiData > p {
+  margin: 20px 0px 0px 0px;
+}
+.main > .left > .wifiData > p.value {
+  margin: 0;
+  font-size: 12px;
+}
+.main > .left > .companionData {
+  font-size: 16px;
+}
+.main > .left > .companionData > p {
+  margin: 20px 0px 0px 0px;
+}
+.main > .left > .companionData > p.value {
+  margin: 0;
+  font-size: 12px;
+}
 .main > .center {
   flex: 1;
+}
+.main > .center > .addIpAddress > .field {
+  width: 300px;
 }
 .main > .center > .addIpAddress > .field p {
   margin: 0px;
 }
 .main > .center > .addIpAddress > .field > input[type="text"] {
+  width: 292px;
   height: 50px;
-  width: 242px;
   font-size: 18pt;
 }
 .main > .center > .addIpAddress > .keyboard {
+  width: 300px;
   display: flex;
   flex-direction: column;
   background-color: #444444;
@@ -101,6 +125,6 @@ body {
   padding-left: 20px;
 }
 .main > .right p {
-  margin: 0px;
+  margin: 0px 0px 20px 0px;
 }
 /*# sourceMappingURL=style.css.map */

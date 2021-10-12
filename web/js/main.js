@@ -1,4 +1,10 @@
 const url = window.location.href + '/ajax.php';
+const companionPort = 8000;
+
+// Weiterleiten zu Companion wenn nicht von localhost geladen
+if (window.location.origin !== 'http://localhost') {
+    window.location.replace(window.location.origin + ':' + companionPort);
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -7,6 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('addIpAddress').oninput = onAddIpAddressChange;
     document.getElementById('addIpAddressBtn').onclick = onAddIpAdresseBtnClick;
     document.getElementById('keyboard').onclick = onKeyboardClick;
+
+    // Companion Port auf GUI schreiben
+    document.getElementById('companionPort').innerHTML = companionPort.toString();
+
+    // WLAN-Daten laden
+    _loadWifiData();
 
     // IP-Adressen auslesen
     _loadIpAddresses();
@@ -20,8 +32,10 @@ document.addEventListener('click', function (e) {
 });
 
 
+// PROTECTED
+
 function _loadIpAddresses() {
-    _makeRequest({}, 'getIpAddresses').then((response) => {
+    _makeRequest({}, 'getIpAddresses').then(response => {
         let element = document.getElementById('ipAddresses');
 
         // Alle IP-Adressen löschen
@@ -44,6 +58,60 @@ function _loadIpAddresses() {
     });
 }
 
+
+function _loadWifiData() {
+    _makeRequest({}, 'getWifiData').then(response => {
+       if (response.ssid) {
+           document.getElementById('ssid').innerHTML = response.ssid;
+       }
+
+       if (response.password) {
+           document.getElementById('password').innerHTML = response.password;
+       }
+    });
+}
+
+
+// Führt einen XHR-Request aus
+function _makeRequest(data, type, params = '') {
+    data = JSON.stringify(data);
+
+    if (params) {
+        params = '&' + params;
+    }
+
+    return new Promise(function (resolve, reject) {
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', () => {
+            const responseJson = JSON.parse(xhr.response);
+
+            // Nachrichten verarbeiten
+            _manageMessages(responseJson);
+
+            resolve(responseJson);
+        });
+
+        xhr.addEventListener('error', () => {
+            const responseJson = JSON.parse(xhr.response);
+
+            // Nachrichten verarbeiten
+            _manageMessages(json);
+
+            reject(xhr.response);
+        });
+
+        // Request senden
+        xhr.open('POST', url + '?type=' + type + params);
+
+        // Content Header setzen
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        // Daten senden
+        xhr.send(data);
+    });
+}
+
+
 function _manageMessages(response) {
     if (response.errMsg) {
         tata.error('Fehler', response.errMsg, {
@@ -56,6 +124,8 @@ function _manageMessages(response) {
     }
 }
 
+
+// LISTENERS
 
 function onAddIpAddressChange(e) {
     let element = e.target;
@@ -75,6 +145,18 @@ function onAddIpAddressChange(e) {
 
         newValue += char;
     });
+
+    // Parts validieren
+    let parts = newValue.split('.');
+    for (let i = 0; i < parts.length; i++) {
+        if (parseInt(parts[i]) >= 255) {
+            tata.error('Fehler', 'Die IP-Adresse ist ungültig.<br>Nur Werte bis 254 sind erlaubt.', {
+                duration: 10000
+            });
+            newValue = '';
+            break;
+        }
+    }
 
     element.value = newValue;
 }
@@ -132,9 +214,12 @@ function onWifiChange(e) {
 
     if (value === 'on') {
         value = 'off';
+        document.getElementById('wifiData').style.display = 'none';
     } else {
         boolValue = true;
         value = 'on';
+        document.getElementById('wifiData').style.display = 'block';
+        _loadWifiData();
     }
     e.target.value = value;
 
@@ -143,46 +228,4 @@ function onWifiChange(e) {
     };
 
     _makeRequest(data, 'wifiChange');
-}
-
-
-// PROTECTED
-
-// Führt einen XHR-Request aus
-function _makeRequest(data, type, params = '') {
-    data = JSON.stringify(data);
-
-    if (params) {
-        params = '&' + params;
-    }
-
-    return new Promise(function (resolve, reject) {
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener('load', () => {
-            const responseJson = JSON.parse(xhr.response);
-
-            // Nachrichten verarbeiten
-            _manageMessages(responseJson);
-
-            resolve(responseJson);
-        });
-
-        xhr.addEventListener('error', () => {
-            const responseJson = JSON.parse(xhr.response);
-
-            // Nachrichten verarbeiten
-            _manageMessages(json);
-
-            reject(xhr.response);
-        });
-
-        // Request senden
-        xhr.open('POST', url + '?type=' + type + params);
-
-        // Content Header setzen
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
-        // Daten senden
-        xhr.send(data);
-    });
 }
