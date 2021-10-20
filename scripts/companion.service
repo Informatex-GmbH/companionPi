@@ -1,0 +1,16 @@
+[Unit]
+Description=Bitfocus Companion (v2.0.0)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/companion
+ExecStart=node /home/pi/companion/headless_ip.js 0.0.0.0
+Restart=on-failure
+KillSignal=SIGINT
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
