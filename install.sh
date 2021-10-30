@@ -68,7 +68,7 @@ sudo mv /home/pi/companionPi/scripts/ip.config /home/pi/ip.config
 sudo chmod 777 /home/pi/ip.config
 sudo mv /home/pi/companionPi/scripts/autodhcp.sh /home/pi/autodhcp.sh
 sudo chmod +x /home/pi/autodhcp.sh
-sudo printf '@reboot sudo ~/autodhcp.sh > ~/autodhcp.log 2>&1' | crontab -
+sudo printf '@reboot sudo ~/autodhcp.sh > ~/autodhcp.log 2>&1\n' | crontab -
 
 # Companion https://github.com/bitfocus/companion/wiki/Manual-Install-on-Raspberry-Pi
 sudo apt install libgusb-dev git build-essential cmake libudev-dev libusb-1.0-0-dev curl -y
