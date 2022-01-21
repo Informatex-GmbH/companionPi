@@ -15,4 +15,5 @@ sudo git clone https://github.com/ifmx-dev/companionPi.git
 
 ### Install
 sudo chmod +x companionPi/install.sh
+
 sudo companionPi/install.sh
