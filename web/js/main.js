@@ -31,7 +31,6 @@ document.addEventListener('click', function (e) {
     }
 });
 
-
 // PROTECTED
 
 function _loadIpAddresses() {
@@ -48,7 +47,7 @@ function _loadIpAddresses() {
             response.rows.forEach((ipAddress) => {
                 let row = document.createElement('p');
                 row.innerHTML = ipAddress;
-                row.onclick = function() {
+                row.onclick = function () {
                     onRemoveIpAddressClick(ipAddress);
                 };
 
@@ -58,19 +57,17 @@ function _loadIpAddresses() {
     });
 }
 
-
 function _loadWifiData() {
     _makeRequest({}, 'getWifiData').then(response => {
-       if (response.ssid) {
-           document.getElementById('ssid').innerHTML = response.ssid;
-       }
+        if (response.ssid) {
+            document.getElementById('ssid').innerHTML = response.ssid;
+        }
 
-       if (response.password) {
-           document.getElementById('password').innerHTML = response.password;
-       }
+        if (response.password) {
+            document.getElementById('password').innerHTML = response.password;
+        }
     });
 }
-
 
 // Führt einen XHR-Request aus
 function _makeRequest(data, type, params = '') {
@@ -111,7 +108,6 @@ function _makeRequest(data, type, params = '') {
     });
 }
 
-
 function _manageMessages(response) {
     if (response.errMsg) {
         tata.error('Fehler', response.errMsg, {
@@ -124,41 +120,37 @@ function _manageMessages(response) {
     }
 }
 
-
 // LISTENERS
 
 function onAddIpAddressChange(e) {
     let element = e.target;
-    let value = e.target.value.replace(/\D/g, '');
-    let numbers = value.split('');
-    let newValue = '';
+    let value = e.target.value;
+    let parts = value.split('.');
 
-    numbers.forEach(function (char, index) {
+    parts.forEach(function (part, index) {
 
-        if (index >= 12) {
-            return;
+        if (part.length > 3) {
+            if (parts.length < 4) {
+                let newPart = part.slice(3);
+                parts.push(newPart);
+            }
+
+            part = part.slice(0, 3);
+            parts[index] = part;
         }
-
-        if (index && index % 3 === 0) {
-            newValue += '.';
-        }
-
-        newValue += char;
     });
 
-    // Parts validieren
-    let parts = newValue.split('.');
-    for (let i = 0; i < parts.length; i++) {
-        if (parseInt(parts[i]) >= 255) {
+    parts.forEach(function (part, index) {
+        if (parseInt(part) >= 255) {
             tata.error('Fehler', 'Die IP-Adresse ist ungültig.<br>Nur Werte bis 254 sind erlaubt.', {
                 duration: 10000
             });
-            newValue = '';
-            break;
+            parts = [];
+            return;
         }
-    }
+    });
 
-    element.value = newValue;
+    element.value = parts.join('.');
 }
 
 function onAddIpAdresseBtnClick() {
@@ -227,5 +219,14 @@ function onWifiChange(e) {
         value: boolValue
     };
 
-    _makeRequest(data, 'wifiChange');
+    _makeRequest(data, 'wifiChange').then(() => {
+        let timeout = 1000;
+        if (value === 'on') {
+            timeout = 3000;
+        }
+
+        setTimeout(function () {
+            _loadIpAddresses();
+        }, timeout);
+    });
 }

@@ -11,7 +11,7 @@ sudo sed -i 's/exit 0/# Disable HDMI\n\/usr\/bin\/tvservice -o\n\nexit 0\n/g' /e
 # Disable Splash-Screen
 sudo sed -i 's/dtparam=audio=on/#dtparam=audio=on\n\n# Disable Splash-Screen\ndisable_splash=1/g' /boot/config.txt
 
-# Boot Messages entfernen
+# Remove Boot Messages
 sudo sed -i 's/console=tty1/console=tty3/g' /boot/cmdline.txt
 sudo sed -i 's/rootwait/rootwait quiet splash loglevel=0 logo.nologo vt.global_cursor_default=0/g' /boot/cmdline.txt
 sudo sed -i 's/exit 0/# Suppress Kernel Messages\ndmesg --console-off\n\nexit 0\n/g' /etc/rc.local
@@ -81,7 +81,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 git clone https://github.com/bitfocus/companion.git /home/pi/companion
 cd /home/pi/companion
 yarn update
-./tools/build_writefile.sh
+yarn build:writefile
 
 sudo mv /home/pi/companionPi/scripts/companion.service /etc/systemd/system/
 sudo chmod 644 /etc/systemd/system/companion.service
