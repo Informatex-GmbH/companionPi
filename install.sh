@@ -71,21 +71,24 @@ sudo chmod +x /home/pi/autodhcp.sh
 sudo printf '@reboot sudo ~/autodhcp.sh > ~/autodhcp.log 2>&1\n' | crontab -
 
 # Companion https://github.com/bitfocus/companion/wiki/Manual-Install-on-Raspberry-Pi
-sudo apt install libgusb-dev git build-essential cmake libudev-dev libusb-1.0-0-dev curl -y
-curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt install nodejs -y
-sudo mv /home/pi/companionPi/scripts/50-companion.rules /etc/udev/rules.d/50-companion.rules
-sudo npm install yarn -g
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+#sudo apt install libgusb-dev git build-essential cmake libudev-dev libusb-1.0-0-dev curl -y
+#curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+#sudo apt install nodejs -y
+#sudo mv /home/pi/companionPi/scripts/50-companion.rules /etc/udev/rules.d/50-companion.rules
+#sudo npm install yarn -g
+#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+#sudo su
+curl https://raw.githubusercontent.com/bitfocus/companion-pi/main/install.sh | bash
+sudo systemctl start companion
 
-git clone https://github.com/bitfocus/companion.git /home/pi/companion
-cd /home/pi/companion
-yarn update
-yarn build:writefile
+#git clone https://github.com/bitfocus/companion.git /home/pi/companion
+#cd /home/pi/companion
+#yarn update
+#yarn build:writefile
 
-sudo mv /home/pi/companionPi/scripts/companion.service /etc/systemd/system/
-sudo chmod 644 /etc/systemd/system/companion.service
-sudo systemctl enable companion.service
+#sudo mv /home/pi/companionPi/scripts/companion.service /etc/systemd/system/
+#sudo chmod 644 /etc/systemd/system/companion.service
+#sudo systemctl enable companion.service
 
 sudo rm -r /home/pi/companionPi
 
