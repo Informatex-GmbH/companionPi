@@ -1,0 +1,190 @@
+/* ******************
+   * Variablen
+   ****************** */
+
+@default-font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+
+@default-main-color: #4398dd;
+@default-second-color: #efefef;
+@default-hover-color: #e2e2e2;
+
+.kijs-viewport {
+    font-family: @default-font-family;
+    font-size: 12pt;
+    color: #555555;
+}
+
+/* ******************
+   * Allgemein
+   ****************** */
+
+.ifmx-default-font-style {
+    font-family: @default-font-family;
+    font-size: 12pt;
+    line-height: 14pt;
+}
+
+div.kijs-panel {
+    > .kijs-container-inner {
+        //background-color: #f9f7f1;
+    }
+}
+
+div.kijs-panelbar {
+    height: 40px;
+
+    > .kijs-icon {
+        font-size: 18pt;
+        line-height: 40px;
+    }
+
+    > .kijs-container-inner {
+        line-height: 40px;
+    }
+
+    &.kijs-headerbar {
+        font-size: 14pt;
+
+        > .kijs-container-right {
+            > .kijs-container-inner {
+                > .kijs-button {
+                    > .kijs-icon {
+                        font-size: 18pt;
+                        line-height: 40px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Button */
+button.kijs-button,
+div.kijs-window > .kijs-footer .kijs-button {
+    margin: 5px;
+    height: 50px;
+    padding: 10px;
+
+    > .kijs-icon {
+        font-size: 12pt;
+    }
+}
+
+/* ******************
+   * 'About'-Fenster
+   ****************** */
+
+div.ifmx-app-aboutwindow {
+    > .kijs-container-inner {
+        font-family: @default-font-family;
+        padding: 20px;
+        overflow: auto;
+
+        > .kijs-field {
+            > .kijs-label {
+                font-size: 12pt;
+                width: 150px;
+            }
+
+            > .kijs-inputwrapper {
+                font-size: 12pt;
+            }
+        }
+    }
+
+    > .kijs-container-inner a {
+        text-decoration: none;
+        color: black;
+    }
+
+    > .kijs-container-inner a:hover {
+        text-decoration: underline;
+    }
+}
+
+/* ******************
+   * Main Panel
+   ****************** */
+div.ifmx-mainpanel {
+    flex: 1;
+
+    > .kijs-panelbar {
+        background-color: var(--panel-bkgrndColor);
+
+        span.ifmx-logo-header {
+            background-image: url('../img/icon/bildlogo_64x64.png');
+            background-repeat: no-repeat;
+            background-size: 30px;
+            width: 40px;
+            height: 30px;
+            padding: 5px;
+        }
+    }
+
+    > .kijs-container-inner {
+        display: flex;
+    }
+}
+
+/* ******************
+   * Keyboard Container
+   ****************** */
+div.ifmx-keyboard-container {
+    width: 200px;
+    display: unset;
+
+    > .kijs-container-inner {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+
+        .kijs-field {
+            margin: 0 5px 10px 5px;
+
+            > .kijs-label {
+                font-size: 12pt;
+                width: 120px;
+            }
+
+            > .kijs-inputwrapper {
+
+                > input {
+                    height: 30px;
+                    font-size: 12pt;
+                    color: black;
+                    background-color: white;
+                }
+
+                > .kijs-icon {
+                    font-size: 18pt;
+                }
+            }
+        }
+
+        > .ifmx-keyboard {
+            > .kijs-container-inner {
+                > .kijs-container {
+                    > .kijs-container-inner {
+                        display: flex;
+                        flex-wrap: wrap;
+
+                        > .kijs-button {
+                            width: 50px;
+                            justify-content: center;
+
+                            > .kijs-caption {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        > .ifmx-add-btn {
+            > .kijs-caption {
+                line-height: 16px;
+            }
+        }
+    }
+}

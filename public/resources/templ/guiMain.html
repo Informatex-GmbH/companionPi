@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/img/icon/bildlogo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="resources/img/icon/bildlogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="resources/img/icon/bildlogo.png">
+    <link rel="shortcut icon" href="resources/img/icon/bildlogo.png">
+    <meta name="apple-mobile-web-app-title" content="ifmx Mixer">
+    <meta name="application-name" content="ifmx Mixer">
+    <meta name="msapplication-TileColor" content="#4398dd">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Include stylesheet -->
+    <link rel="stylesheet" href="resources/css/app.css">
+
+    <!-- Include kijs -->
+    <script type="text/javascript" src="lib/kijs/js/kijs-debug.js"></script>
+
+    <!-- Include JS files -->
+    <script type="text/javascript" src="js/app/App.js"></script>
+    <script type="text/javascript" src="js/app/AboutWindow.js"></script>
+    <script type="text/javascript" src="js/app/MainPanel.js"></script>
+    <script type="text/javascript" src="js/sp/IpAddressContainer.js"></script>
+    <script type="text/javascript" src="js/sp/KeyboardContainer.js"></script>
+
+    <!--App-->
+    <script type="text/javascript">
+        if (!(function() {
+            try { eval("let works = (x)=>x+1"); }
+            catch (e) { return false; }
+            return true;
+        }())) {
+            window.onload = function() {
+                let html = '<div class="browser-not-supported">';
+                html += '    <div class="box">';
+                html += '       <div>Dein Browser wird nicht unterstüzt.</div>';
+                html += '       <div>Bitte benutze einen der folgenden Browser:</div>';
+                html += '       <div class="browsers">';
+                html += '           <div><a href="https://www.firefox.com"><img src="resources/img/browsers/firefox.png" />Firefox</a></div>';
+                html += '           <div><a href="https://www.microsoft.com/windows/microsoft-edge"><img src="resources/img/browsers/edge.png" />Edge</a></div>';
+                html += '           <div><a href="https://www.google.com/chrome"><img src="resources/img/browsers/chrome.png" />Chrome</a></div>';
+                html += '           <div><a href="https://www.apple.com/safari"><img src="resources/img/browsers/safari.png" />Safari</a></div>';
+                html += '           <div><a href="https://www.opera.com"><img src="resources/img/browsers/opera.png" />Opera</a></div>';
+                html += '           <div><a href="https://vivaldi.com"><img src="resources/img/browsers/vivaldi.png" />Vivaldi</a></div>';
+                html += '       </div>';
+                html += '   </div>';
+                html += '</div>';
+                document.body.innerHTML = html;
+            };
+        }
+
+        if (window.kijs) {
+            kijs.isReady(function(){
+                new ifmx.app.App(#CONFIG#).run();
+            });
+        }
+    </script>
+
+    <title>CompanionPi</title>
+</head>
+<body>
+</body>
+</html>

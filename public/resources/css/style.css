@@ -1,0 +1,129 @@
+/* ******************
+   * Variablen
+   ****************** */
+.kijs-viewport {
+  font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+  font-size: 12pt;
+  color: #555555;
+}
+/* ******************
+   * Allgemein
+   ****************** */
+.ifmx-default-font-style {
+  font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+  font-size: 12pt;
+  line-height: 14pt;
+}
+div.kijs-panelbar {
+  height: 40px;
+}
+div.kijs-panelbar > .kijs-icon {
+  font-size: 18pt;
+  line-height: 40px;
+}
+div.kijs-panelbar > .kijs-container-inner {
+  line-height: 40px;
+}
+div.kijs-panelbar.kijs-headerbar {
+  font-size: 14pt;
+}
+div.kijs-panelbar.kijs-headerbar > .kijs-container-right > .kijs-container-inner > .kijs-button > .kijs-icon {
+  font-size: 18pt;
+  line-height: 40px;
+}
+/* Button */
+button.kijs-button,
+div.kijs-window > .kijs-footer .kijs-button {
+  margin: 5px;
+  height: 50px;
+  padding: 10px;
+}
+button.kijs-button > .kijs-icon,
+div.kijs-window > .kijs-footer .kijs-button > .kijs-icon {
+  font-size: 12pt;
+}
+/* ******************
+   * 'About'-Fenster
+   ****************** */
+div.ifmx-app-aboutwindow > .kijs-container-inner {
+  font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+  padding: 20px;
+  overflow: auto;
+}
+div.ifmx-app-aboutwindow > .kijs-container-inner > .kijs-field > .kijs-label {
+  font-size: 12pt;
+  width: 150px;
+}
+div.ifmx-app-aboutwindow > .kijs-container-inner > .kijs-field > .kijs-inputwrapper {
+  font-size: 12pt;
+}
+div.ifmx-app-aboutwindow > .kijs-container-inner a {
+  text-decoration: none;
+  color: black;
+}
+div.ifmx-app-aboutwindow > .kijs-container-inner a:hover {
+  text-decoration: underline;
+}
+/* ******************
+   * Main Panel
+   ****************** */
+div.ifmx-mainpanel {
+  flex: 1;
+}
+div.ifmx-mainpanel > .kijs-panelbar {
+  background-color: var(--panel-bkgrndColor);
+}
+div.ifmx-mainpanel > .kijs-panelbar span.ifmx-logo-header {
+  background-image: url('../img/icon/bildlogo_64x64.png');
+  background-repeat: no-repeat;
+  background-size: 30px;
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+}
+div.ifmx-mainpanel > .kijs-container-inner {
+  display: flex;
+}
+/* ******************
+   * Keyboard Container
+   ****************** */
+div.ifmx-keyboard-container {
+  width: 200px;
+  display: unset;
+}
+div.ifmx-keyboard-container > .kijs-container-inner {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+div.ifmx-keyboard-container > .kijs-container-inner .kijs-field {
+  margin: 0 5px 10px 5px;
+}
+div.ifmx-keyboard-container > .kijs-container-inner .kijs-field > .kijs-label {
+  font-size: 12pt;
+  width: 120px;
+}
+div.ifmx-keyboard-container > .kijs-container-inner .kijs-field > .kijs-inputwrapper > input {
+  height: 30px;
+  font-size: 12pt;
+  color: black;
+  background-color: white;
+}
+div.ifmx-keyboard-container > .kijs-container-inner .kijs-field > .kijs-inputwrapper > .kijs-icon {
+  font-size: 18pt;
+}
+div.ifmx-keyboard-container > .kijs-container-inner > .ifmx-keyboard > .kijs-container-inner > .kijs-container > .kijs-container-inner {
+  display: flex;
+  flex-wrap: wrap;
+}
+div.ifmx-keyboard-container > .kijs-container-inner > .ifmx-keyboard > .kijs-container-inner > .kijs-container > .kijs-container-inner > .kijs-button {
+  width: 50px;
+  justify-content: center;
+}
+div.ifmx-keyboard-container > .kijs-container-inner > .ifmx-keyboard > .kijs-container-inner > .kijs-container > .kijs-container-inner > .kijs-button > .kijs-caption {
+  font-size: 14px;
+}
+div.ifmx-keyboard-container > .kijs-container-inner > .ifmx-add-btn > .kijs-caption {
+  line-height: 16px;
+}
+/*# sourceMappingURL=style.css.map */
