@@ -1,0 +1,10 @@
+{
+    "name": "CompanionPi",
+    "version": "1.0.0",
+    "dependencies": {
+        "express": "^4.18.2",
+        "json5": "^2.2.3",
+        "process": "^0.11.10",
+        "ws": "^8.14.2"
+    }
+}

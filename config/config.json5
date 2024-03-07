@@ -1,0 +1,9 @@
+// Config
+
+{
+  app: {
+    name: 'CompanionPi',
+    version: '0.1.0',
+    port: 80
+  }
+}
